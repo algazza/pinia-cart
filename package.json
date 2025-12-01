@@ -1,0 +1,25 @@
+{
+  "name": "pinia-cart",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/image": "2.0.0",
+    "@primeuix/themes": "^2.0.1",
+    "@primevue/nuxt-module": "^4.5.0",
+    "@tailwindcss/vite": "^4.1.17",
+    "nuxt": "^4.2.1",
+    "pinia": "^3.0.4",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.5.0",
+    "tailwindcss": "^4.1.17",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3"
+  }
+}
