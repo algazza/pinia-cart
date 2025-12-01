@@ -8,7 +8,11 @@ const onSubmit = () => {
   const text = value.value.trim();
   if (!text) return;
 
-  todoStore.addTodo(text);
+  todoStore.addTodo({
+    id: Date.now() + Math.floor(Math.random() * 1000),
+    text: text,
+    done: false,
+  });
   value.value = "";
 };
 </script>
