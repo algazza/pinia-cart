@@ -5,7 +5,7 @@ type TodoState = {
   completed: string[];
 };
 
-export const useTodoStore = defineStore("cart", {
+export const useTodoStore = defineStore("todo", {
   state: (): TodoState => ({
     todo: [],
     completed: [],
