@@ -1,40 +1,48 @@
 import { defineStore } from "pinia";
 
+type Todo = {
+    id: number;
+    text: string;
+    done: boolean
+  }
+
 type TodoState = {
-  todo: string[];
-  completed: string[];
+  todos: Todo[];
 };
 
 export const useTodoStore = defineStore("todo", {
   state: (): TodoState => ({
-    todo: [],
-    completed: [],
+    todos: [],
   }),
   getters: {
+    todoList(): Todo[] {
+      return this.todos.filter(t => !t.done)
+    },
+    completedList(): Todo[] {
+      return this.todos.filter(t => t.done)
+    },
     todoLength(): number {
-      return this.todo.length;
+      return this.todoList.length;
     },
-    completedTodoLength(): number {
-      return this.completed.length;
+    completedLength(): number {
+      return this.completedList.length;
     },
+
   },
   actions: {
-    addTodo(list: string) {
-      this.todo.unshift(list);
+    addTodo(list: Todo) {
+      this.todos.unshift(list);
     },
-    deleteTodo(list: string) {
-      this.todo = this.todo.filter((item) => item !== list);
+    deleteTodo(list: Todo) {
+      this.todos = this.todos.filter((item) => item.id !== list.id);
     },
     clearTodo(){
-        this.todo = []
+        this.todos = []
     },
-    completedTodo(list: string) {
-      this.completed.unshift(list);
-      this.todo = this.todo.filter((item) => item !== list);
-    },
-    unCompletedTodo(list: string) {
-      this.todo.push(list);
-      this.completed = this.completed.filter((item) => item !== list);
-    },
+    toggleDone(list: Todo){
+      const todo = this.todos.find((t) => t.id === list.id)
+      if(!todo) return
+      todo.done = !todo.done
+    }
   },
 });
