@@ -33,3 +33,10 @@ export const loginSchema = z.object({
     .string("This field is required")
     .min(6, "character must be more than 6"),
 });
+
+export const userSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  username: z.string(),
+  phone: z.string()
+})
