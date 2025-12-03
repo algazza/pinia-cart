@@ -15,6 +15,7 @@
     "@primeuix/themes": "^2.0.1",
     "@primevue/nuxt-module": "^4.5.0",
     "@tailwindcss/vite": "^4.1.17",
+    "chart.js": "^4.5.1",
     "jspdf": "^3.0.4",
     "nuxt": "^4.2.1",
     "pinia": "^3.0.4",
