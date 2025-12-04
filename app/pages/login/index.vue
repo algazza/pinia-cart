@@ -1,39 +1,59 @@
 <script setup lang="ts">
-import { Field, Form, ErrorMessage } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
 import { loginSchema } from "~/schema/auth.schema";
-import { useLogin } from "~/composables/auth/useLogin";
+import { zodResolver } from "@primevue/forms/resolvers/zod";
 
-const validationSchema = toTypedSchema(loginSchema);
-const {mutate, isPending, error} = useLogin()
-const onSubmit = (values: any) => {
-  console.log(values)
-}
+const resolver = ref(zodResolver(loginSchema));
 
+const onSubmit = ({ values }: any) => {
+  console.log(values);
+};
 </script>
 
 <template>
   <section class="flex justify-center items-center h-dvh w-full">
-    <Form :validation-schema="validationSchema" @submit="onSubmit" class="space-y-4 border-2 border-primary p-4 rounded-xl w-80">
+    <Form
+      v-slot="$form"
+      :resolver="resolver"
+      @submit="onSubmit"
+      class="space-y-4 border-2 border-primary p-4 rounded-xl w-80"
+    >
       <div class="grid">
         <label for="">Username</label>
-        <Field
+        <InputText
           name="username"
           type="text"
-          class="border border-white px-3 py-1 rounded-lg"
+          placeholder="Username"
+          fluid
+          class="border! border-white! rounded-lg!"
         />
-        <ErrorMessage name="username" class="text-red-500"/>
+        <Message
+          v-if="$form.username?.invalid"
+          severity="error"
+          size="small"
+          variant="simple"
+        >
+          {{ $form.username.error.message }}
+        </Message>
       </div>
       <div class="grid">
         <label for="">Password</label>
-        <Field
+        <InputText
           name="password"
           type="password"
-          class="border border-white px-3 py-1 rounded-lg"
+          placeholder="Password"
+          fluid
+          class="border! border-white! rounded-lg!"
         />
-        <ErrorMessage name="password" class="text-red-500"/>
+        <Message
+          v-if="$form.password?.invalid"
+          severity="error"
+          size="small"
+          variant="simple"
+        >
+          {{ $form.password.error.message }}
+        </Message>
       </div>
-      <Button class="w-full rounded-2xl!">Submit</Button>
+      <Button type="submit" class="w-full rounded-2xl!">Submit</Button>
     </Form>
   </section>
 </template>
